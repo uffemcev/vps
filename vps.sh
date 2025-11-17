@@ -16,7 +16,7 @@ meta_title="Подписка"
 meta_description="VPN"
 source <(wget -qO- https://github.com/legiz-ru/marz-sub/raw/main/marz-sub.sh)
 
-subscription_url="https://raw.githubusercontent.com/hydraponique/roscomvpn-happ-routing/refs/heads/main/Auto-routing%20for%20Non-json%20Marzban/subscription.py"
+subscription_url="https://github.com/hydraponique/roscomvpn-happ-routing/raw/main/Auto-routing%20for%20Non-json%20Marzban/subscription.py"
 subscription_file="/opt/xray-vps-setup/marzban/templates/subscription.py"
 docker_compose_file="/opt/xray-vps-setup/docker-compose.yml"
 mkdir -p /opt/xray-vps-setup/marzban/templates
