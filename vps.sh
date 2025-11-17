@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #ЗАПРОС ДОМЕНА
+clear
 read -ep "Enter your domain:"$'\n' input_domain
 read() { true; }
 
