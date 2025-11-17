@@ -32,6 +32,6 @@ sed -i -E "s|^#?\s*$target_var.*|$target_var=\"$domain\"|" "$env_file"
 docker compose -f /opt/xray-vps-setup/docker-compose.yml down && docker compose -f /opt/xray-vps-setup/docker-compose.yml up -d
 clear
 
-echo "Marzban panel location: https://${VLESS_DOMAIN}/${MARZBAN_PATH}"
+echo "Panel: https://${VLESS_DOMAIN}/${MARZBAN_PATH}"
 echo "User: xray_admin"
 echo "Password: ${MARZBAN_PASS}"
