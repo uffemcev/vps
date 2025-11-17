@@ -5,9 +5,9 @@
 * https://github.com/hydraponique/roscomvpn-happ-routing
 
 ## Требования
-* VPS
-* Домен любого уровня
-* DNS запись
+* Сброшенный VPS
+* Ubuntu 24.04
+* Домен и DNS запись
 
 ## Запуск
 ```bash
