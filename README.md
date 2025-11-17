@@ -1,12 +1,13 @@
 ## Описание
-Быстрая установка и настройка перечисленных компонентов:
+Быстрая установка и настройка связки Marzban, Sub page и Happ routing:
 * https://github.com/Akiyamov/xray-vps-setup
 * https://github.com/legiz-ru/marz-sub
 * https://github.com/hydraponique/roscomvpn-happ-routing
 
 ## Требования
 * VPS
-* Домен любого уровня и DNS запись
+* Домен любого уровня
+* DNS запись
 
 ## Запуск
 ```bash
