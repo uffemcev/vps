@@ -1,5 +1,5 @@
 ## Описание
-Быстрая установка и настройка связки Marzban, Sub page и Happ routing:
+Быстрая установка и настройка Marzban, Sub page и Happ routing:
 * https://github.com/Akiyamov/xray-vps-setup
 * https://github.com/legiz-ru/marz-sub
 * https://github.com/hydraponique/roscomvpn-happ-routing
