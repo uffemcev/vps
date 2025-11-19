@@ -3,6 +3,7 @@
 #ЗАПРОС ДОМЕНА
 clear
 read -ep "Enter your domain:"$'\n' input_domain
+apt update && apt upgrade -y && apt install sqlite3 -y
 read() { true; }
 
 # УСТАНОВКИ ПАНЕЛИ
@@ -33,6 +34,22 @@ source_var="XRAY_SUBSCRIPTION_URL_PREFIX"
 target_var="SUB_PROFILE_TITLE"
 domain=$(grep -E "^$source_var" "$env_file" | sed -E "s/^[^=]+=\s*\"?https?:\/\/([^\"/]+).*/\1/")
 sed -i -E "s|^#?\s*$target_var.*|$target_var=\"$domain\"|" "$env_file"
+
+# ИМЯ ПОЛЬЗОВАТЕЛЯ
+{
+db_path="/opt/xray-vps-setup/marzban_lib/db.sqlite3"
+new_value="{USERNAME}"
+check_query="SELECT remark FROM hosts WHERE remark IS NOT NULL AND remark != '' LIMIT 1;"
+while true; do
+current_value=$(sqlite3 "$db_path" "$check_query")
+if [[ -n "$current_value" ]]; then
+update_query="UPDATE hosts SET remark='$new_value' WHERE remark='$current_value';"
+sqlite3 "$db_path" "$update_query"
+break
+fi
+sleep 5
+done
+} &
 
 # ВЫДАЧА ДАННЫХ
 docker compose -f /opt/xray-vps-setup/docker-compose.yml down && docker compose -f /opt/xray-vps-setup/docker-compose.yml up -d
