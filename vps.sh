@@ -3,7 +3,7 @@
 #ЗАПРОС ДОМЕНА
 clear
 read -ep "Enter your domain:"$'\n' input_domain
-apt update && apt upgrade -y && apt install sqlite3 -y
+apt update && apt install sqlite3 -y
 read() { true; }
 
 # УСТАНОВКИ ПАНЕЛИ
