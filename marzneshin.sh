@@ -14,7 +14,7 @@ input_admin_user=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 16; echo)
 enable_xhttp="y"
 enable_hysteria="y"
 configure_ufw_input="y"
-bash <(wget -qO- https://raw.githubusercontent.com/artemscine/xray-vps-setup/refs/heads/main/vps-setup.sh)
+source <(wget -qO- https://github.com/artemscine/xray-vps-setup/raw/main/vps-setup.sh)
 
 # СЕРВИСЫ
 db_path="/opt/marzneshin-vps-setup/marzneshin_data/db.sqlite3"
