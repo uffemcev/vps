@@ -33,6 +33,6 @@ sed -i '/marzneshin:/,/volumes:/s|volumes:|volumes:\n      - ./marzneshin_data/t
 # ВЫДАЧА ДАННЫХ
 docker compose -f /opt/marzneshin-vps-setup/docker-compose.yml down && docker compose -f /opt/marzneshin-vps-setup/docker-compose.yml up -d
 clear
-echo "Panel: https://${VLESS_DOMAIN}/${MARZBAN_PATH}"
-echo "User: xray_admin"
-echo "Password: ${MARZBAN_PASS}"
+echo "Dashboard: https://${VLESS_DOMAIN}/${DASHBOARD_PATH}/"
+echo "User: ${ADMIN_USER}"
+echo "Password: ${MARZNESHIN_PASS}"
