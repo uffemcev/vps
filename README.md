@@ -11,5 +11,5 @@
 
 ## Запуск
 ```bash
-bash <(wget -qO- https://github.com/uffemcev/vps/raw/main/vps.sh)
+bash <(wget -qO- https://github.com/uffemcev/vps/raw/main/marzban.sh)
 ```
