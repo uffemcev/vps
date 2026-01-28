@@ -19,7 +19,7 @@ source <(wget -qO- https://github.com/artemscine/xray-vps-setup/raw/main/vps-set
 # НАСТРОЙКИ БД
 db_path="/opt/marzneshin-vps-setup/marzneshin_data/db.sqlite3"
 sqlite3 "$db_path" "INSERT INTO services (name) VALUES ('Service');"
-sqlite3 "$db_path" "INSERT INTO inbounds_services (inbound_id, service_id) VALUES (1, 1), (2, 1), (3, 1);"
+sqlite3 "$db_path" "INSERT INTO inbounds_services (inbound_id, service_id) SELECT id, (SELECT id FROM services WHERE name = 'Service') FROM inbounds;"
 sqlite3 "$db_path" "UPDATE hosts SET remark = (SELECT tag FROM inbounds WHERE inbounds.id = hosts.inbound_id) WHERE inbound_id IS NOT NULL;"
 sqlite3 "$db_path" "UPDATE settings SET subscription = json_set(subscription, '\$.profile_title', 'VPN', '\$.support_link', '');"
 
