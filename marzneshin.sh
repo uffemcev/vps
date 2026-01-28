@@ -23,6 +23,14 @@ sqlite3 "$db_path" "INSERT INTO inbounds_services (inbound_id, service_id) VALUE
 sqlite3 "$db_path" "UPDATE hosts SET remark = (SELECT tag FROM inbounds WHERE inbounds.id = hosts.inbound_id) WHERE inbound_id IS NOT NULL;"
 sqlite3 "$db_path" "UPDATE settings SET subscription = json_set(subscription, '\$.profile_title', 'VPN', '\$.support_link', '');"
 
+#ЯЗЫК
+index_file="/opt/marzneshin-vps-setup/marzneshin_data/templates/index.html"
+docker_compose_file="/opt/marzneshin-vps-setup/docker-compose.yml"
+mkdir -p /opt/marzneshin-vps-setup/marzneshin_data/templates
+docker cp marzneshin:/app/dashboard/dist/index.html $index_file
+sed -i "s|<head>|<head>\\n  <script>localStorage.setItem('i18nextLng', 'en');</script>|" $index_file
+sed -i '/marzneshin:/,/volumes:/s|volumes:|volumes:\n      - ./marzneshin_data/templates/index.html:/app/dashboard/dist/index.html|' "$docker_compose_file"
+
 # НАСТРОЙКА РОУТИНГА
 #subscription_url="https://github.com/hydraponique/roscomvpn-happ-routing/raw/main/Auto-routing%20for%20some%20panels/Marzneshin%20NON-JSON/subscription.py"
 #subscription_file="/opt/marzneshin-vps-setup/marzneshin_data/templates/subscription.py"
