@@ -19,5 +19,6 @@ bash <(wget -qO- https://github.com/uffemcev/vps/raw/main/marzneshin.sh)
 
 ## Требования
 * Сброшенный VPS
+* 2 ГБ RAM
 * Ubuntu 24.04
 * Домен и DNS запись
