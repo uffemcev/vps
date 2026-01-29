@@ -1,17 +1,21 @@
 ## Marzban
-Быстрая установка и настройка Marzban, Sub page и Happ routing:
-* https://github.com/Akiyamov/xray-vps-setup
-* https://github.com/legiz-ru/marz-sub
-* https://github.com/hydraponique/roscomvpn-happ-routing
+Быстрая установка и настройка компонентов:
+* [xray-vps-setup](https://github.com/Akiyamov/xray-vps-setup)
+* [marz-sub](https://github.com/legiz-ru/marz-sub)
+* [roscomvpn-happ-routing](https://github.com/hydraponique/roscomvpn-happ-routing)
+* Vless TCP Reality inbound
 
 ```bash
 bash <(wget -qO- https://uffemcev.github.io/vps/marzban.sh)
 ```
 
 ## Marzneshin
-Быстрая установка и настройка Marzneshin и Happ routing:
-* https://github.com/artemscine/xray-vps-setup
-* https://github.com/hydraponique/roscomvpn-happ-routing
+Быстрая установка и настройка компонентов:
+* [xray-vps-setup](https://github.com/artemscine/xray-vps-setup)
+* [roscomvpn-happ-routing](https://github.com/hydraponique/roscomvpn-happ-routing)
+* Vless TCP Reality inbound
+* VLess XHTTP Reality inbound
+* Hysteria2 inbound
 
 ```bash
 bash <(wget -qO- https://uffemcev.github.io/vps/marzneshin.sh)
