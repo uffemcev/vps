@@ -29,18 +29,15 @@ script_file="/opt/marzneshin-vps-setup/marzneshin_data/templates/script.txt"
 docker_compose_file="/opt/marzneshin-vps-setup/docker-compose.yml"
 cat << 'EOF' > "$script_file"
   <script>
-    // Включить английский язык
     localStorage.setItem('i18nextLng', 'en');
     document.addEventListener('DOMContentLoaded', () => {
       new MutationObserver(() => {
         if (document.body.innerText.includes('Create User')) {
-          // Включить кнопку Never
           const n = [...document.querySelectorAll('button[role="tab"]')].find(b => b.innerText.includes('Never'));
           if (n && !n.dataset.fix) { 
              n.dispatchEvent(new MouseEvent('mousedown', {bubbles: true})); 
              n.dataset.fix = 1; 
           }
-          // Включить первый service
           const c = document.querySelector('button[role="checkbox"]');
           if (c && !c.dataset.fix) { 
              c.click(); 
