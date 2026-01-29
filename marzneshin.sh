@@ -30,27 +30,17 @@ docker_compose_file="/opt/marzneshin-vps-setup/docker-compose.yml"
 cat << 'EOF' > "$script_file"
   <script>
     localStorage.setItem('i18nextLng', 'en');
-    document.addEventListener('DOMContentLoaded', () => {
-      new MutationObserver(() => {
-        if (document.body.innerText.includes('Create User')) {
-          const n = [...document.querySelectorAll('button[role="tab"]')].find(b => b.innerText.includes('Never'));
-          if (n && !n.dataset.fix) { 
-             n.dispatchEvent(new MouseEvent('mousedown', {bubbles: true})); 
-             n.dataset.fix = 1; 
-          }
-          const c = document.querySelector('button[role="checkbox"]');
-          if (c && !c.dataset.fix) { 
-             c.click(); 
-             c.dataset.fix = 1; 
-          }
-        }
-      }).observe(document.body, { childList: true, subtree: true });
-    });
+    new MutationObserver(() => {
+      const btn = [...document.querySelectorAll('button')].find(b => b.textContent.includes('Never'));
+      const chk = document.querySelector('button[role="checkbox"]');
+      if (btn && !btn.d && (btn.d=1) && btn.getAttribute('aria-selected') !== 'true') {btn.dispatchEvent(new MouseEvent('mousedown', {bubbles: true}));}
+      if (chk && !chk.d && (chk.d=1) && chk.getAttribute('aria-checked') === 'false') {chk.click();}
+    }).observe(document.body, { childList: true, subtree: true });
   </script>
 EOF
 mkdir -p /opt/marzneshin-vps-setup/marzneshin_data/templates
 docker cp marzneshin:/app/dashboard/dist/index.html "$index_file"
-sed -i "/<head>/r $script_file" "$index_file"
+sed -i "/<body>/r $script_file" "$index_file"
 sed -i '/marzneshin:/,/volumes:/s|volumes:|volumes:\n      - ./marzneshin_data/templates/index.html:/app/dashboard/dist/index.html|' "$docker_compose_file"
 rm "$script_file"
 
