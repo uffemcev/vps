@@ -5,7 +5,7 @@
 * https://github.com/hydraponique/roscomvpn-happ-routing
 
 ```bash
-bash <(wget -qO- https://github.com/uffemcev/vps/raw/main/marzban.sh)
+bash <(wget -qO- https://uffemcev.github.io/vps/marzban.sh)
 ```
 
 ## Marzneshin
@@ -14,7 +14,7 @@ bash <(wget -qO- https://github.com/uffemcev/vps/raw/main/marzban.sh)
 * https://github.com/hydraponique/roscomvpn-happ-routing
 
 ```bash
-bash <(wget -qO- https://github.com/uffemcev/vps/raw/main/marzneshin.sh)
+bash <(wget -qO- https://uffemcev.github.io/vps/marzneshin.sh)
 ```
 
 ## Требования
