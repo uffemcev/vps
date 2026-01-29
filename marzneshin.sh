@@ -45,12 +45,12 @@ sed -i '/marzneshin:/,/volumes:/s|volumes:|volumes:\n      - ./marzneshin_data/t
 rm "$script_file"
 
 # НАСТРОЙКА РОУТИНГА
-#subscription_url="https://github.com/hydraponique/roscomvpn-happ-routing/raw/main/Auto-routing%20for%20some%20panels/Marzneshin%20NON-JSON/subscription.py"
-#subscription_file="/opt/marzneshin-vps-setup/marzneshin_data/templates/subscription.py"
-#docker_compose_file="/opt/marzneshin-vps-setup/docker-compose.yml"
-#mkdir -p /opt/marzneshin-vps-setup/marzneshin_data/templates
-#curl -L "$subscription_url" -o "$subscription_file"
-#sed -i '/marzneshin:/,/volumes:/s|volumes:|volumes:\n      - ./marzneshin_data/templates/subscription.py:/app/app/routes/subscription.py|' "$docker_compose_file"
+subscription_url="https://github.com/hydraponique/roscomvpn-happ-routing/raw/main/Auto-routing%20for%20some%20panels/Marzneshin%20NON-JSON/subscription.py"
+subscription_file="/opt/marzneshin-vps-setup/marzneshin_data/templates/subscription.py"
+docker_compose_file="/opt/marzneshin-vps-setup/docker-compose.yml"
+mkdir -p /opt/marzneshin-vps-setup/marzneshin_data/templates
+curl -L "$subscription_url" -o "$subscription_file"
+sed -i '/marzneshin:/,/volumes:/s|volumes:|volumes:\n      - ./marzneshin_data/templates/subscription.py:/app/app/routes/subscription.py|' "$docker_compose_file"
 
 # ВЫДАЧА ДАННЫХ
 docker compose -f /opt/marzneshin-vps-setup/docker-compose.yml down && docker compose -f /opt/marzneshin-vps-setup/docker-compose.yml up -d
