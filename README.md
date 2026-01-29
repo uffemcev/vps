@@ -14,7 +14,7 @@ bash <(wget -qO- https://uffemcev.github.io/vps/marzban.sh)
 * [xray-vps-setup](https://github.com/artemscine/xray-vps-setup)
 * [roscomvpn-happ-routing](https://github.com/hydraponique/roscomvpn-happ-routing)
 * Vless TCP Reality inbound
-* VLess XHTTP Reality inbound
+* Vless XHTTP Reality inbound
 * Hysteria2 inbound
 
 ```bash
