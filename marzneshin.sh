@@ -45,7 +45,7 @@ sed -i '/marzneshin:/,/volumes:/s|volumes:|volumes:\n      - ./marzneshin_data/t
 rm "$script_file"
 
 #НАСТРОЙКА РОУТИНГА
-subscription_url="https://github.com/hydraponique/roscomvpn-happ-routing/raw/main/Auto-routing%20for%20some%20panels/Marzneshin%20NON-JSON/subscription.py"
+subscription_url="https://github.com/hydraponique/roscomvpn-routing/raw/main/ADDON_AUTOROUTING/Marzneshin%20NON-JSON/subscription.py"
 subscription_file="/opt/marzneshin-vps-setup/marzneshin_data/templates/subscription.py"
 docker_compose_file="/opt/marzneshin-vps-setup/docker-compose.yml"
 mkdir -p /opt/marzneshin-vps-setup/marzneshin_data/templates
