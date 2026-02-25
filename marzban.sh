@@ -54,6 +54,6 @@ done
 # ВЫДАЧА ДАННЫХ
 docker compose -f /opt/xray-vps-setup/docker-compose.yml down && docker compose -f /opt/xray-vps-setup/docker-compose.yml up -d
 clear
-echo "Panel: https://${VLESS_DOMAIN}/${MARZBAN_PATH}"
+echo "Dashboard: https://${VLESS_DOMAIN}/${MARZBAN_PATH}"
 echo "User: xray_admin"
 echo "Password: ${MARZBAN_PASS}"
