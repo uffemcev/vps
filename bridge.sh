@@ -19,7 +19,7 @@ en_url=$(sshpass -p "$en_password" ssh -o StrictHostKeyChecking=no -o UserKnownH
     configure_ssh_input="n"
     configure_warp_input="n"
     source <(wget -qO- https://github.com/Akiyamov/xray-vps-setup/raw/main/vps-setup.sh) > /dev/null 2>&1
-    echo "vless://$XRAY_UUID@$VLESS_DOMAIN:443?type=tcp&security=reality&pbk=$XRAY_PBK&fp=chrome&sni=$VLESS_DOMAIN&sid=&spx=%2F&flow=xtls-rprx-vision"
+    echo "vless://$XRAY_UUID@$VLESS_DOMAIN:443?type=tcp&security=reality&pbk=$XRAY_PBK&fp=chrome&sni=$VLESS_DOMAIN&sid=&spx=%2F&flow=xtls-rprx-vision#EN"
 EOF
 )
 
