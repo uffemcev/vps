@@ -7,10 +7,10 @@ read -ep "Enter your EN domain:"$'\n' en_domain
 read -ep "Enter your EN ip:"$'\n' en_ip
 read -ep "Enter your EN login:"$'\n' en_login
 read -ep "Enter your EN password:"$'\n' en_password
-apt update && apt install -y sqlite3 sshpass
+apt update && apt install -y sqlite3 sshpass expect
 read() { true; }
 
-# НАСТРОЙКА EN
+#НАСТРОЙКА EN
 en_url=$(sshpass -p "$en_password" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$en_login@$en_ip" bash -s "$en_domain" << 'EOF'
     export TERM=xterm
     read() { true; }
@@ -23,12 +23,23 @@ en_url=$(sshpass -p "$en_password" ssh -o StrictHostKeyChecking=no -o UserKnownH
 EOF
 )
 
-# НАСТРОЙКА RU
+#НАСТРОЙКА RU
 install_choice=2
 input_domain=$ru_domain
 configure_ssh_input="n"
 configure_warp_input="n"
 source <(wget -qO- https://github.com/Akiyamov/xray-vps-setup/raw/main/vps-setup.sh)
+
+#УСТАНОВКА ZAPRET
+wget https://raw.githubusercontent.com/IndeecFOX/z4r/4/z4r
+expect -c '
+  set timeout 60
+  spawn bash z4r
+  expect {
+    "zapret перезапущен и полностью установлен" { send "\r"; exit }
+    -re "\[?:] " { send "\r"; exp_continue }
+  }
+'
 
 #УСТАНОВКА БАЗ
 geoip_url="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/geoip.dat"
@@ -41,7 +52,7 @@ curl -L "$geosite_url" -o "$geosite_file"
 sed -i '/marzban:/,/volumes:/s|volumes:|volumes:\n      - ./xray-core/geosite.dat:/usr/local/share/xray/geosite.dat|' "$docker_compose_file"
 sed -i '/marzban:/,/volumes:/s|volumes:|volumes:\n      - ./xray-core/geoip.dat:/usr/local/share/xray/geoip.dat|' "$docker_compose_file"
 
-# ВЫДАЧА ДАННЫХ
+#ВЫДАЧА ДАННЫХ
 docker compose -f /opt/xray-vps-setup/docker-compose.yml down && docker compose -f /opt/xray-vps-setup/docker-compose.yml up -d
 clear
 echo "Dashboard: https://${VLESS_DOMAIN}/${MARZBAN_PATH}"
