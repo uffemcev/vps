@@ -12,12 +12,12 @@ read() { true; }
 
 #НАСТРОЙКА EN
 en_url=$(sshpass -p "$en_password" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$en_login@$en_ip" bash -s "$en_domain" << 'EOF'
-    export TERM=xterm
     read() { true; }
-    install_choice=1
-    input_domain="$1"
-    configure_ssh_input="n"
-    configure_warp_input="n"
+    export TERM=xterm
+    export install_choice=1
+    export input_domain="$1"
+    export configure_ssh_input="n"
+    export configure_warp_input="n"
     source <(wget -qO- https://github.com/Akiyamov/xray-vps-setup/raw/main/vps-setup.sh) > /dev/null 2>&1
     echo "vless://$XRAY_UUID@$VLESS_DOMAIN:443?type=tcp&security=reality&pbk=$XRAY_PBK&fp=chrome&sni=$VLESS_DOMAIN&sid=&spx=%2F&flow=xtls-rprx-vision#EN"
 EOF
