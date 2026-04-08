@@ -24,20 +24,30 @@ EOF
 )
 
 #НАСТРОЙКА RU
-install_choice=2
-input_domain=$ru_domain
-configure_ssh_input="n"
-configure_warp_input="n"
-source <(wget -qO- https://github.com/Akiyamov/xray-vps-setup/raw/main/vps-setup.sh)
-
-#УСТАНОВКА ZAPRET
-wget https://raw.githubusercontent.com/IndeecFOX/z4r/4/z4r
+export install_choice=2
+export input_domain=$ru_domain
+export configure_ssh_input="n"
+export configure_warp_input="n"
 expect -c '
   set timeout 60
-  spawn bash z4r
+  spawn bash -x -c "source <(wget -qO- https://github.com/Akiyamov/xray-vps-setup/raw/main/vps-setup.sh)"
   expect {
-    "zapret перезапущен и полностью установлен" { send "\r"; exit }
+    -re {read .* (\w+)\r?\n} {
+      set v $expect_out(1,string)
+      if {[info exists env($v)]} {send "$env($v)\r"}
+      exp_continue
+    }
+    eof { exit }
+  }
+'
+
+#УСТАНОВКА ZAPRET
+expect -c '
+  set timeout 60
+  spawn bash -x -c "source <(wget -qO- https://raw.githubusercontent.com/IndeecFOX/z4r/4/z4r)"
+  expect {
     -re "\[?:] " { send "\r"; exp_continue }
+    eof { exit }
   }
 '
 
