@@ -7,7 +7,8 @@ read -ep "Enter your EN domain:"$'\n' en_domain
 read -ep "Enter your EN ip:"$'\n' en_ip
 read -ep "Enter your EN login:"$'\n' en_login
 read -ep "Enter your EN password:"$'\n' en_password
-apt update && apt install -y sqlite3 sshpass expect
+apt update && apt install -y sqlite3 sshpass
+read() { true; }
 
 #НАСТРОЙКА EN
 en_url=$(sshpass -p "$en_password" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$en_login@$en_ip" bash -s "$en_domain" << 'EOF'
@@ -27,28 +28,10 @@ export install_choice=2
 export input_domain=$ru_domain
 export configure_ssh_input="n"
 export configure_warp_input="n"
-expect -c '
-  set timeout -1
-  spawn bash -x -c "source <(wget -qO- https://github.com/Akiyamov/xray-vps-setup/raw/main/vps-setup.sh)"
-  expect {
-    -re {read .* (\w+)\r?\n} {
-      set v $expect_out(1,string)
-      if {[info exists env($v)]} {send "$env($v)\r"}
-      exp_continue
-    }
-    eof { exit }
-  }
-'
+source <(wget -qO- https://github.com/Akiyamov/xray-vps-setup/raw/main/vps-setup.sh)
 
 #УСТАНОВКА ZAPRET
-expect -c '
-  set timeout -1
-  spawn bash -x -c "source <(wget -qO- https://raw.githubusercontent.com/IndeecFOX/z4r/4/z4r)"
-  expect {
-    -re "\[?:] " { send "\r"; exp_continue }
-    eof { exit }
-  }
-'
+source <(wget -qO- https://raw.githubusercontent.com/IndeecFOX/z4r/4/z4r)
 
 #УСТАНОВКА БАЗ
 export geoip_url="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/geoip.dat"
@@ -62,12 +45,6 @@ sed -i '/marzban:/,/volumes:/s|volumes:|volumes:\n      - ./xray-core/geosite.da
 sed -i '/marzban:/,/volumes:/s|volumes:|volumes:\n      - ./xray-core/geoip.dat:/usr/local/share/xray/geoip.dat|' "$docker_compose_file"
 
 #ВЫДАЧА ДАННЫХ
-export ANGIE_FILE="/opt/xray-vps-setup/angie.conf"
-export MARZBAN_FILE="/opt/xray-vps-setup/marzban/.env"
-export VLESS_DOMAIN=$(grep -oP 'server_name \K[^;]+' $ANGIE_FILE | head -n 1 | xargs)
-export MARZBAN_USER=$(grep "SUDO_USERNAME" $MARZBAN_FILE | cut -d'"' -f2)
-export MARZBAN_PASS=$(grep "SUDO_PASSWORD" $MARZBAN_FILE | cut -d'"' -f2)
-export MARZBAN_PATH=$(grep "XRAY_SUBSCRIPTION_PATH" $MARZBAN_FILE | cut -d'"' -f2 | xargs)
 docker compose -f /opt/xray-vps-setup/docker-compose.yml down && docker compose -f /opt/xray-vps-setup/docker-compose.yml up -d
 clear
 echo "Dashboard: https://${VLESS_DOMAIN}/${MARZBAN_PATH}"
