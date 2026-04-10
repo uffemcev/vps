@@ -31,7 +31,7 @@ export configure_warp_input="n"
 source <(wget -qO- https://github.com/Akiyamov/xray-vps-setup/raw/main/vps-setup.sh)
 
 #УСТАНОВКА ZAPRET
-source <(wget -qO- https://raw.githubusercontent.com/IndeecFOX/z4r/4/z4r)
+while sleep 1; do echo; done | script -q -e -c "wget https://raw.githubusercontent.com/IndeecFOX/z4r/4/z4r && sh z4r" /dev/null
 
 #УСТАНОВКА БАЗ
 export geoip_url="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/geoip.dat"
