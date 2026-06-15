@@ -33,8 +33,23 @@ source <(wget -qO- https://raw.githubusercontent.com/xVRVx/autoXRAY/main/autoXRA
 while sleep 1; do echo; done | script -q -e -c "wget https://raw.githubusercontent.com/IndeecFOX/z4r/4/z4r && sh z4r" /dev/null
 
 #РЕДАКТИРОВАНИЕ МАРШРУТОВ
+xrayConfig="/usr/local/etc/xray/config.json"
+newJSON=$(jq '.routing.rules |= map(
+  select(.outboundTag == "direct").domain |= [
+    "geosite:youtube",
+    "youtube.com",
+    "googlevideo.com",
+    "ytimg.com",
+    "ggpht.com"
+  ] + (. // [])
+)' "$xrayConfig")
+echo "$newJSON" > "$xrayConfig"
+
+# Перезапускаем Xray
+systemctl restart xray
 
 #ВЫДАЧА ДАННЫХ
 systemctl restart xray
 clear
 echo "EN подписка: ${en_url[1]}"
+echo "RU подписка: $configListLink"
