@@ -45,9 +45,6 @@ newJSON=$(jq '.routing.rules |= map(
 )' "$xrayConfig")
 echo "$newJSON" > "$xrayConfig"
 
-# Перезапускаем Xray
-systemctl restart xray
-
 #ВЫДАЧА ДАННЫХ
 systemctl restart xray
 clear
